@@ -105,7 +105,7 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
     // addin [ at start of json
     MyFile << "[" << endl;
     //main loop 
-    for (int B = 0; B < list_size; B++){
+    for (int B = 1; B < list_size; B++){
         
         
     //starting first element in json with {
@@ -164,7 +164,7 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
     string json;
     //main loop
     json += "[\n" ;
-    for (int B = 0; B < list_size; B++){
+    for (int B = 1; B < list_size; B++){
 
     //we use /n to make new line and [ { to start a json
     
