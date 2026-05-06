@@ -63,3 +63,22 @@ list<string> Split_Rows(string sen) {
 }
 
 
+string GetRow(list<string> List, int place){
+    if (place < 0){
+        place = 0;
+    }else if (place == 0)
+    {
+        return List.front();
+    }
+    
+    if (place > List.size()) {
+    place = List.size();
+    }
+
+    for (int i = 0; i < place; i++) {
+        List.pop_front();
+    }
+    return List.front();
+}
+
+
