@@ -26,6 +26,14 @@ Converts .tsv to JSON. Has 3 arguments:
 ```save_file``` = if true, saves the JSON file
 ```csv``` = if true, counts commas
 
+
+| Function ```TSV_To_CSV(string path,bool Save_File = false, string Name = "Myfile.csv")```
+
+| Function ```CSV_To_TSV(string path,bool Save_File = false, string Name = "Myfile.tsv")```
+
+
+Very simillar to Json conversion function but this functions convert .tsv to .csv and .csv to .tsv
+
 ### file format
 test.tsv
 ```md
