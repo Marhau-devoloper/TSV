@@ -76,7 +76,7 @@ list<string> Split_Rows(string &sentence,  bool csv = false) {
 }
 
 // function to get specific row from list like 0 
-string GetRow(list<string>& List, size_t place){
+string GetRow(list<string>& List, size_t& place){
     if (place >= List.size()) {
     place = List.size() - 1;
     }
@@ -96,7 +96,7 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
     //verbs is splited row of headder with will using as veriables in json 
     list<string>  verbs = Split_Rows(Headder,csv);
     // check how many verbs
-    const short int number_of_verbs = verbs.size();
+    size_t number_of_verbs = verbs.size();
     
     //if Save_file == true we save result in file
     if (save_file == true){
@@ -105,10 +105,8 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
     // addin [ at start of json
     MyFile << "[" << endl;
     
-    // count  main loop
-    int counts;
     
-    for (const auto& _ : lists){
+    for (size_t counts = 1; counts < lists.size(); counts++){
         
         
         //starting first element in json with {
@@ -118,12 +116,12 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
         // we split line into smaller pices
         list<string> Value = Split_Rows(TSV_Data,csv);
         //loop with write a json structure like "verb": value
-        for (int i = 1; i < number_of_verbs; i++)
+        for (size_t i = 0; i < number_of_verbs; i++)
         {
             //we get a line   
             string key = GetRow(verbs, i);
             // we split line into smaller pices
-            string value = GetRow(Value, i);
+            string value = (i < Value.size()) ? GetRow(Value, i) : "";
 
             // clean key
             key.erase(remove(key.begin(), key.end(), '\n'), key.end());
@@ -156,7 +154,7 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
         //make indent
         MyFile << endl;
         //move to next part
-        counts =+1;
+        
         }
         
         //finish a json with ]
@@ -169,7 +167,7 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
     string json;
     //main loop
     json += "[\n" ;
-    int counts = 1;
+    size_t counts = 1;
     for (const auto& _ : lists){
 
     //we use /n to make new line and [ { to start a json
@@ -180,7 +178,7 @@ string TSV_To_Json(string Path,bool save_file = false, bool csv = false ){
     //we dividing line into pieces
     list<string> Value = Split_Rows(TSV_Data,csv);
     //loop with write a json structure like "verb": value
-    int ijson;
+    size_t ijson;
     for (const auto& _ : verbs)
     {
         
